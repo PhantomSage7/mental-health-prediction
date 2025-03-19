@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.cluster import KMeans
 import numpy as np
+from imblearn.combine import SMOTETomek
 
 class ClusterTransformer(BaseEstimator, TransformerMixin):
     def __init__(self, n_clusters=3):
@@ -22,9 +23,9 @@ class ClusterTransformer(BaseEstimator, TransformerMixin):
 
 def create_pipeline(model):
     return Pipeline([
-        ('imputer', SimpleImputer(strategy='median')),  # Handle missing values
+        ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler()),
-        ('smote_tomek', SMOTETomek()),
+        ('smote_tomek', SMOTETomek(k_neighbors=3)),  # Reduced from 5 to 3
         ('cluster', ClusterTransformer(n_clusters=3)),
         ('classifier', model)
     ])
