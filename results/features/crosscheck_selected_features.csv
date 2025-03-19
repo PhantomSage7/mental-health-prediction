@@ -1,0 +1,80 @@
+0
+Unnamed: 0
+ema_CALM
+ema_DEPRESSED
+ema_HARM
+ema_HOPEFUL
+ema_SEEING_THINGS
+ema_SLEEPING
+ema_SOCIAL
+ema_STRESSED
+ema_THINK
+ema_VOICES
+ema_neg_score
+ema_pos_score
+act_in vehicle_ep_1
+act_in vehicle_ep_3
+act_on bike_ep_0
+act_on bike_ep_3
+act_on foot_ep_0
+act_on foot_ep_2
+act_on foot_ep_3
+act_on foot_ep_4
+act_still_ep_0
+act_still_ep_2
+act_still_ep_3
+act_still_ep_4
+act_tilting_ep_4
+act_unknown_ep_0
+act_unknown_ep_2
+act_unknown_ep_3
+act_unknown_ep_4
+audio_amp_mean_ep_0
+audio_amp_mean_ep_1
+audio_amp_mean_ep_2
+audio_amp_mean_ep_3
+audio_amp_mean_ep_4
+audio_amp_std_ep_1
+audio_amp_std_ep_2
+audio_amp_std_ep_3
+audio_amp_std_ep_4
+audio_convo_duration_ep_2
+audio_convo_num_ep_0
+audio_convo_num_ep_2
+audio_convo_num_ep_3
+audio_convo_num_ep_4
+audio_voice_ep_0
+audio_voice_ep_1
+audio_voice_ep_3
+audio_voice_ep_4
+call_in_num_ep_0
+call_in_num_ep_2
+call_in_num_ep_3
+call_out_duration_ep_0
+call_out_duration_ep_2
+call_out_num_ep_0
+light_mean_ep_0
+light_mean_ep_1
+light_mean_ep_2
+light_mean_ep_3
+light_mean_ep_4
+light_std_ep_0
+light_std_ep_1
+light_std_ep_2
+light_std_ep_3
+light_std_ep_4
+loc_dist_ep_1
+loc_dist_ep_2
+loc_dist_ep_3
+loc_dist_ep_4
+quality_loc
+sms_in_num_ep_0
+sms_in_num_ep_1
+unlock_duration_ep_0
+unlock_duration_ep_1
+unlock_duration_ep_2
+unlock_duration_ep_4
+unlock_num_ep_2
+unlock_num_ep_3
+unlock_num_ep_4
+loc_dist_total
