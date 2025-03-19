@@ -6,10 +6,8 @@ import joblib
 from sklearn.metrics import accuracy_score, f1_score
 from pathlib import Path
 
-# Add parent directories to path
 sys.path.append(str(Path(__file__).parent.parent))
 from config import DATA_PATHS, MODEL_PATHS, BASE_DIR
-from model_utils import create_pipeline  # 
 
 def loso_evaluation():
     results = []
@@ -30,7 +28,7 @@ def loso_evaluation():
                 train = df[df['study_id'] != subject]
                 test = df[df['study_id'] == subject]
                 
-                if len(test) == 0:
+                if len(test) < 3 or len(train) < 10:
                     continue
                     
                 X_train = train.drop(columns=['ema_score', 'study_id'], errors='ignore')
@@ -38,23 +36,34 @@ def loso_evaluation():
                 X_test = test.drop(columns=['ema_score', 'study_id'], errors='ignore')
                 y_test = test['ema_score']
                 
+                # Skip single-class folds
                 if len(y_train.unique()) < 2:
                     continue
-                    
-                model.fit(X_train, y_train)
-                preds = model.predict(X_test)
                 
-                results.append({
-                    'dataset': dataset,
-                    'subject': subject,
-                    'accuracy': accuracy_score(y_test, preds),
-                    'f1': f1_score(y_test, preds, average='weighted')
-                })
+                # Check minority class size
+                y_counts = y_train.value_counts()
+                if y_counts.min() < 4:  # k_neighbors=3 needs at least 4 samples
+                    continue
+                    
+                try:
+                    model.fit(X_train, y_train)
+                    preds = model.predict(X_test)
+                    
+                    results.append({
+                        'dataset': dataset,
+                        'subject': subject,
+                        'accuracy': accuracy_score(y_test, preds),
+                        'f1': f1_score(y_test, preds, average='weighted')
+                    })
+                except Exception as e:
+                    print(f"Subject {subject} error: {str(e)}")
+                    continue
         
         except Exception as e:
-            print(f"Error processing {dataset}: {str(e)}")
+            print(f"Dataset {dataset} error: {str(e)}")
             continue
     
+    # Save results
     results_dir = BASE_DIR/'results/metrics'
     results_dir.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(results).to_csv(results_dir/'loso_results.csv', index=False)
